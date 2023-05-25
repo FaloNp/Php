@@ -1,0 +1,499 @@
+body {
+	padding: 0px !important;
+	max-width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+table {
+	border-collapse: collapse;
+	width: 70%;
+	background-color: #173a91;
+	table-layout: fixed;
+}
+
+td {
+	border: 1px solid #0349fc;
+	text-align: center;
+	padding: 5px;
+	margin: 2px;
+	flex-basis: 0;
+	flex-grow: 1;
+}
+
+
+
+.container {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	background-color: black;
+	flex-direction: column;
+}
+
+.loginButton {
+	width: 100px;
+	height: 20px;
+	cursor: pointer;
+	color: black;
+	border: 1px solid black;
+	margin: 0px 20px;
+	text-align: center;
+}
+
+.loginButton:hover {
+	border-radius: 0%;
+	transition: 0.4s;
+	background-color: transparent;
+	color: #0349fc;
+	border: 1px solid #0349fc;
+}
+
+.leftcollumn {
+	padding: 51px 0px;
+	display: flex;
+	width: 100%;
+	max-width: 100%;
+	justify-content: center;
+	align-items: center;
+}
+
+.leftcollumncalendar {
+	background-color: #173a91;
+	min-height: 200px;
+	height: 90%;
+	width: 90%;
+	border: 1px solid #0349fc;
+	border-radius: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.rightcollumn {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding-bottom: 20px;
+}
+
+.rightcollumnrepertuarlist {
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	min-height: 51vh;
+
+}
+
+.rightcollumnrepertuarheader {
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid #0349fc;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.rightcollumnrepertuar {
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid #0349fc;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.rightcollumnrepertuarempty {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	border-bottom: 1px solid #0349fc;
+	align-items: center;
+}
+
+
+.loginBox {
+	overflow: hidden;
+	position: fixed;
+	transform: translate(-50%, -50%) scale(0);
+	transition: 200ms ease-in-out;
+	z-index: 2;
+	background-color: transparent;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0px 25px;
+	top: 50%;
+	transition: 1.2s;
+	display: flex;
+	flex-direction: row;
+	border-radius: 10px;
+	left: 50%;
+}
+
+.loginBoxReturn {
+	width: 25px;
+	height: 25px;
+	background-color: transparent;
+	cursor: pointer;
+	border: 4px solid black;
+	transition: all 0.4s ease;
+	border-radius: 4px;
+	margin: 10px
+}
+
+.loginBoxContainer {
+	border: 1px solid black;
+	background-color: #0349fc;
+	height: 200px;
+	border-radius: 10px;
+	overflow-y: scroll;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.loginBoxUser {
+	display: flex;
+	width: 100px;
+	border: 1px solid #173a91;
+}
+
+.userBoxContainer {
+	position: absolute;
+	border: 2px solid black;
+	background-color: #0349fc;
+	height: 200px;
+	border-radius: 10px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	width: 100%;
+	margin: 1000px;
+	display: flex;
+	flex-direction: column;
+	justify-content: left;
+}
+
+.row {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	padding: 10px;
+	align-items: center;
+}
+
+.rowHeader {
+	width: 50%;
+}
+
+.error {
+	color: red;
+	border: 1px solid r;
+	border-radius: 50%;
+	padding: 12px;
+}
+
+.activefield {
+	transform: translate(-50%, -50%) scale(1) !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+*/
+
+
+
+/*
+#pasek
+{
+	float: right;
+	margin-left: 40%;
+	width: 700px;
+	max-width: 100%;
+	padding: 14px;
+}
+.klawisz
+{
+	float: left;
+	min-width: 50px;
+	max-height: 40px;
+	padding: 25px;
+	font-size: auto;
+}
+
+
+.a:hover{
+		background-color: black ;
+		color:white;
+}
+
+a:link
+{
+  text-decoration: none!important;
+  color: black !important;
+}
+
+#logo{
+	padding:14px;
+	width:50px;
+	max-width: 100%;
+}
+
+*/
+/*
+
+.zdjecie_glowna
+{
+	margin-left: 40%;
+	margin-top: 40%;
+	width: 100%;
+	max-width: 100%;
+	padding: 7px;
+	height: auto;
+}
+#dopelnienie
+{
+	background-color: #ffe4c4;
+	height: 40px;
+	weidth:100%;
+}
+#informacje
+{
+	margin: auto; 
+	padding: 0px;
+	float: left;
+	background-color: #ffe4c4;
+	width: 100%;
+	height: 150px;
+	max-width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	border-top: 4px solid #8fbc8f;
+	text-align: justify;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+.info
+{
+	float: left;
+	min-width: 50px;
+	max-height: 40px;
+	padding: 40px;
+	font-size: auto;
+}
+
+
+
+#logowanie
+{
+	margin-left: auto;
+	margin-right: auto;
+	padding: 40;
+	width: 400px;
+	margin-top: 400px;
+	max-width: 100%;
+	height: 500px;
+	max-height: 100%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	background-color: #8fbc8f;
+}
+
+#projekt
+{
+	height: auto;
+	margin-left: auto;
+	float: right;
+	margin-right: auto;
+	margin-top: 40px;
+	width: 1400px;
+	max-width: 100%;	
+	min-height: 100vh;
+	background-color: #ffe4c4;
+}
+#projekt_pudelko
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 1400px;
+	float: right;
+	height: 400px;
+	max-width: 100%;
+}
+#projekt_lewa
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 24%;
+	padding:40px;
+	float: left;
+	height: auto;
+	max_width: 50%;
+}
+.zdjecie_projekt
+{
+	display: block;
+    margin: 0 auto;
+	max-width: 100%;
+	padding: 0px;
+}
+#projekt_prawa
+{
+	margin-left: auto;
+	margin-right: 40px;
+	width: 50%;
+	float: right;
+	max_width: 100%;
+	margin-top: 0px;
+	text-align: justify;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	font-size:50px;
+	max-height: 100px;
+	padding: 0px;
+}
+
+
+
+#zdjecia_owner
+{
+	margin-left: auto;
+	margin-right: auto;
+	float: center;
+	max_width: 100%;
+	pudding: 4px;
+	background-color: #ffe4c4;
+	min-height: 100vh;
+}#zdjecia_ramki
+{
+	height: auto;
+	margin-left: auto;
+	float: right;
+	margin-right: auto;
+	margin-top: 5px;
+	width: 1400px;
+	max-width: 100%;
+	min-height: 100vh;
+	background-color: #ffe4c4;
+}
+._zdjecie
+{	
+	width: 400px;
+	height: 200px;
+	padding: 14px;
+	max-width: 90%;
+	max-height: 90%;
+		
+}
+
+
+
+.lol_projekt
+{
+	margin-top: 50%;
+	float: center;
+}
+.infy
+{
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+
+
+
+*/
+
+/*
+<div id="pasek">
+			<div class="klawisz"><a href="index.php">Strona glowna</a></div>
+			<div class="klawisz"><a href="projekty.php">Projekty</a></div>
+			<div class="klawisz"><a href="znowu.php">Cena</a></div>
+			<div class="klawisz"><a href="kontakt.php">Kontakt</a></div>
+			<div style="clear:both;"></div>
+		</div>
+		<a href="index.php">
+			<div id="logo">
+				<img src="foto/logo/logo.png" />
+			</div>
+		</a>
+		
+		
+		
+<div id="informacje">
+			dane kontaktowe</br>
+			telefon</br>
+			email </br>
+			</p>
+			<p>&copy; 2021 Własność Falo. Wszelkie prawa zastrzezone.</p>
+		</div>*/
