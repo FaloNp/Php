@@ -2,9 +2,6 @@
 <?php
 session_start();
 
-//echo "<pre>";
-//var_dump($_SESSION); // lub print_r($_SESSION);
-//echo "</pre>"
 ?>
 <html lang="pl">
 
@@ -21,58 +18,116 @@ session_start();
 
 <body>
 	<div class="container">
-		<div class="leftcollumn">
-			<div class="leftcollumncalendar">
-				<table class="mycalendar">
-					<tbody>
-						<?php for ($row = 1; $row <= 5; $row++) { ?>
-							<tr>
-								<?php for ($cell = 1; $cell <= 7; $cell++) { ?>
-									<td> 1</td>
-								<?php } ?>
-							</tr>
-						<?php } ?>
-					</tbody>
-				</table>
+
+
+		<div class="loginBar">
+			<div class="date">
+				<?php
+				if (isset($_GET['focusdate'])) {
+					$focusdate = $_GET['focusdate'];
+					$focusdate = date('d.m.Y', strtotime($focusdate));
+					if (strtotime($focusdate) === false) {
+						$focusdate = date('Y.m.d');
+					}
+					//echo "Otrzymana wartość focusdate: " . $focusdate;
+				} else {
+					$focusdate = date('Y.m.d');
+					//echo $focusdate;
+				}
+				echo 'Repertuar na: ' . $focusdate ?>
 			</div>
+			<?php
+			if ((isset($_SESSION["zalogowano"])) && ($_SESSION["zalogowano"] == true)) {
+				if ((isset($_SESSION["falo"])) && ($_SESSION["falo"] == true)) {
+					echo "<div class='loginButton'><a href='uploadrepertuar.php'>Dodaj film</a></div>";
+				}
+				echo "<div class='loginButton'><a href='logout.php'>Wyloguj</a></div>";
+				echo "<div class='error'>" . $_SESSION['Login'] . "</div>";
+			} else {
+				echo "<div class='loginButton'>Zaloguj</div>";
+			} ?>
 		</div>
-		<div class="rightcollumn">
-			<div class="rightcollumnrepertuarlist">
-				<div class="rightcollumnrepertuarheader">Repertuar na dzis
+
+
+		<div class='mainPage'>
+			<div class="leftcollumn">
+				<div class="leftcollumncalendar">
+					<div class="calendarButton">
+						<img src='css/resource/leftarrow.png'>
+					</div>
+					<div id="calendar">
+						<table class="mycalendar">
+							<div id="today"></div>
+							<tbody>
+								<?php for ($row = 1; $row <= 5; $row++) { ?>
+									<tr>
+										<?php for ($cell = 1; $cell <= 7; $cell++) { ?>
+											<td></td>
+										<?php } ?>
+									</tr>
+								<?php } ?>
+							</tbody>
+						</table>
+					</div>
+					<div class="calendarButton">
+						<img src='css/resource/rightarrow.png'>
+					</div>
+				</div>
+			</div>
+
+			<div class="rightcollumn">
+				<div class="rightcollumnrepertuarlist">
 					<?php
-					if ((isset($_SESSION["zalogowano"])) && ($_SESSION["zalogowano"] == true)) {
-						echo "<div class='error'>" . $_SESSION['Login'] . "</div>";
-					} else {
-						echo "<div class='loginButton'>Zaloguj</div>";
+					require_once "data.php";
+					try {
+						if (isset($_GET['focusdate'])) {
+							$focusdate = $_GET['focusdate'];
+							if (strtotime($focusdate) === false) {
+								$focusdate = date('Y-m-d');
+							}
+							//echo "Otrzymana wartość focusdate: " . $focusdate;
+						} else {
+							$focusdate = date('Y-m-d');
+							//echo $focusdate;
+						}
+						$request = @new mysqli($dataName, $dataLogin, $dataPassword, $dataPath);
+						if ($request->connect_errno != 0) {
+							throw new Exception(mysqli_connect_errno());
+						} else {
+							$wynik = @$request->query(sprintf("SELECT * FROM repertuar WHERE Data = '%s'", $focusdate));
+							$ile_wyniki = $wynik->num_rows; //sprawdza ile znalazlo uzytkownikow
+							if ($ile_wyniki > 0) {
+								while ($informacje = $wynik->fetch_assoc()) {
+									echo "<div class = 'rightcollumnrepertuar'>";
+
+									echo "<div class = 'rightcollumnrepertuarelement'>";
+									echo "<img src=repertuar/Photo/" . $informacje['Photo'] . ">";
+									echo "</div>";
+
+									echo "<div class = 'rightcollumnrepertuarelement'>";
+									echo "<div>";
+									echo $informacje["Name"];
+									echo "</div>";
+									echo "<div>";
+									echo $informacje["Description"];
+									echo "</div>";
+									echo "</div>";
+
+									echo "</div>";
+								}
+							} else {
+								echo "<div class='rightcollumnrepertuarempty'>Przepraszamy tego dnia nie odbedzie sie zadne przedstawienie</div>";
+							}
+						}
+						$request->close();
+					} catch (Exception $error) {
+						echo "Serwer w tym momencie jest wylaczony, prosimy o zarejestrowanie sie pozniej"; //dla uzytkownika
+						echo "<br /> Dokladna informacja: " . $error;
 					} ?>
 				</div>
-				<div class="rightcollumnrepertuarempty">Przepraszamy tego dnia nie odbedzie sie zadne przedstawienie</div>
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	<div class='loginBox'>
@@ -99,7 +154,6 @@ session_start();
 				?>
 			</form>
 		</div>
-
 
 		<div class='userBoxContainer'>
 			<form action="user.php" method="post">

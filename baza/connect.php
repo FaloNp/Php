@@ -23,7 +23,7 @@ if ($check->connect_errno != 0) {
 				$_SESSION["zalogowano"] = true; //uzytkownik zalogowal sie na profil
 				$_SESSION["Login"] = $informacje["Login"];
 				unset($_SESSION["blad"]);
-				if ($informacje['ID'] === 1) {
+				if ($informacje['id'] == 1) {
 					$_SESSION["falo"] = true; //flaga uprawnien administratora
 				}
 				$wynik->close();

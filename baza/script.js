@@ -1,55 +1,99 @@
 // Funkcja do tworzenia kalendarza
-function calendar() {
-  var date = new Date();
-  var year = date.getFullYear();
-  var month = date.getMonth();
+var date = new Date();
+
+var urlParams = new URLSearchParams(window.location.search);
+var focusdate = urlParams.get('focusdate');
+if (focusdate) {
+  var dateArray = focusdate.split('-');
+  var currentyear = dateArray[0];
+  var currentmonth = dateArray[1] - 1;
+  var currentday = dateArray[2] - 1 + 1;//usuwa 0 przed cyfra
+}
+else {
+  var currentyear = date.getFullYear();
+  var currentmonth = date.getMonth();
   var currentday = date.getDate();
+}
+
+//console.log(currentday + "." + (currentmonth + 1) + "." + currentyear);
+
+var yearchange = currentyear;
+var monthchange = currentmonth;
+var focusday = 0;
+
+function calendar(month, year) {
   var dniWMiesiacu = new Date(year, month + 1, 0).getDate();
   var poczatekMiesiaca = new Date(year, month, 1).getDay();
-  console.log(dniWMiesiacu)
-  console.log(poczatekMiesiaca)
+
+
   var table = document.getElementsByClassName("mycalendar")[0];
   var row = table.getElementsByTagName("tr");
-  var dayList = ['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Niedz'];
-  day = 1;
+
+  var today = document.getElementById('today');
+  today.innerHTML = (month + 1) + "." + year;
+
+  var day = 1;
+  var startDay = poczatekMiesiaca === 0 ? 6 : poczatekMiesiaca - 1; // Dostosowanie indeksowania dni
+
   for (var week = 0; week < row.length; week++) {
     var cells = row[week].getElementsByTagName("td");
     for (var dayinweek = 0; dayinweek < cells.length; dayinweek++) {
-      cells[dayinweek].textContent = day;
-      if (day < 10) {
-        cells[dayinweek].textContent = '0' + day;
+      if (week === 0 && dayinweek < startDay || day > dniWMiesiacu) {
+        cells[dayinweek].textContent = '';
       }
-      if (day === currentday) {
-        cells[dayinweek].style.color = 'white';
+      else {
+        cells[dayinweek].textContent = day < 10 ? '0' + day : day;
+        if (day === currentday && month === currentmonth && year === currentyear) {
+          cells[dayinweek].style.color = 'white';
+        } else {
+          cells[dayinweek].style.color = 'black';
+        }
+
+
+        if (day == date.getDate() && month == date.getMonth() && year == date.getFullYear()) {
+          cells[dayinweek].style.color = '#997501';
+        }
+        day++;
       }
-      day++;
     }
   }
 }
-calendar();
+
+calendar(currentmonth, currentyear);
+
+var Left = document.getElementsByClassName('calendarButton')[0];
+var Right = document.getElementsByClassName('calendarButton')[1];
+
+Left.addEventListener('click', () => {
+  monthchange = monthchange - 1;
+  focusday = 0;
+  if (monthchange < 0) {
+    monthchange = 11;
+    yearchange = yearchange - 1;
+  }
+  calendar(monthchange, yearchange);
+});
+
+Right.addEventListener('click', () => {
+  monthchange = monthchange + 1;
+  focusday = 0;
+  if (monthchange > 11) {
+    monthchange = 0;
+    yearchange = yearchange + 1;
+  }
+  calendar(monthchange, yearchange);
+});
+
 
 // Funkcja do obsługi zdarzenia kliknięcia w pole tabeli
 function handleCellClick(event) {
   var date = event.target.textContent;
+  focusday = date;
+  calendar(monthchange, yearchange);
+  var focusdate = yearchange + "-" + (monthchange + 1) + "-" + focusday
   if (date) {
-    // Tutaj możesz wykonać żądanie do bazy danych, używając wartości `date`
-    console.log('Kliknięto w pole z datą:', date);
-    // Przykładowe zapytanie AJAX do bazy danych
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-          var response = xhr.responseText;
-          // Tutaj możesz przetworzyć otrzymaną odpowiedź z bazy danych
-          console.log('Odpowiedź z bazy danych:', response);
-        } else {
-          console.error('Wystąpił błąd podczas żądania do bazy danych.');
-        }
-      }
-    };
-    // Przykładowe zapytanie GET do pliku PHP obsługującego zapytanie do bazy danych
-    xhr.open('GET', 'get_data.php?date=' + date, true);
-    xhr.send();
+    var redirectURL = "index.php?focusdate=" + encodeURIComponent(focusdate);
+    window.location.href = redirectURL;
   }
 }
 

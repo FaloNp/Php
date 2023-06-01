@@ -1,21 +1,17 @@
 body {
-	padding: 0px !important;
-	max-width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
+	padding: 0px;
+	margin: 0px;
 }
 
 table {
 	border-collapse: collapse;
 	width: 70%;
-	background-color: #173a91;
+	background-color: pink;
 	table-layout: fixed;
 }
 
 td {
-	border: 1px solid #0349fc;
+	border: 1px solid #997501;
 	text-align: center;
 	padding: 5px;
 	margin: 2px;
@@ -23,16 +19,30 @@ td {
 	flex-grow: 1;
 }
 
-
+td:hover {
+	background-color: #997501;
+	color: pink;
+	cursor: pointer;
+}
 
 .container {
-	margin-left: auto;
-	margin-right: auto;
 	width: 100%;
 	height: 100vh;
 	display: flex;
-	background-color: black;
+	background-color: pink;
+	overflow: hidden;
 	flex-direction: column;
+}
+
+.loginBar {
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid #997501;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0px 10px;
 }
 
 .loginButton {
@@ -40,21 +50,31 @@ td {
 	height: 20px;
 	cursor: pointer;
 	color: black;
-	border: 1px solid black;
+	border: 1px solid #997501;
 	margin: 0px 20px;
 	text-align: center;
 }
 
+
 .loginButton:hover {
 	border-radius: 0%;
 	transition: 0.4s;
-	background-color: transparent;
-	color: #0349fc;
-	border: 1px solid #0349fc;
+	background-color: pink;
+	color: black;
+}
+
+.mainPage {
+	display: flex;
+	flex-direction: column;
+	background-color: #F2D1CB;
+	border: 1px solid #997501;
+	overflow-y: scroll;
+	padding: 50px 5px;
 }
 
 .leftcollumn {
-	padding: 51px 0px;
+	background-color: transparent;
+	padding: 0px;
 	display: flex;
 	width: 100%;
 	max-width: 100%;
@@ -63,16 +83,39 @@ td {
 }
 
 .leftcollumncalendar {
-	background-color: #173a91;
+	background-color: transparent;
 	min-height: 200px;
-	height: 90%;
-	width: 90%;
-	border: 1px solid #0349fc;
-	border-radius: 20px;
+	width: 100%;
+	border-bottom: 1px solid #997501;
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+}
+
+#calendar {
+	width: 70%;
+	display: flex;
 	flex-direction: column;
+}
+
+#today {
+	display: flex;
+	justify-content: left;
+}
+
+.mycalendar {
+	width: 100%;
+}
+
+.calendarButton {
+	width: 15%;
+}
+
+.calendarButton img {
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
 }
 
 .rightcollumn {
@@ -81,42 +124,46 @@ td {
 	justify-content: center;
 	align-items: flex-start;
 	padding-bottom: 20px;
+	background-color: transparent;
 }
 
 .rightcollumnrepertuarlist {
 	width: 90%;
 	display: flex;
 	flex-direction: column;
-	background-color: white;
-	min-height: 51vh;
+	background-color: #F2D1CB;
+	min-height: 250px;
 
-}
-
-.rightcollumnrepertuarheader {
-	width: 100%;
-	height: 50px;
-	border-bottom: 1px solid #0349fc;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	justify-content: space-between;
 }
 
 .rightcollumnrepertuar {
 	width: 100%;
-	height: 50px;
-	border-bottom: 1px solid #0349fc;
+	height: 220px;
+	border-bottom: 1px solid #997501;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
 
+.rightcollumnrepertuarelement {
+	width: 200px;
+	display: flex;
+	flex-direction: column;
+}
+
+.rightcollumnrepertuarelement img {
+	max-width: 200px;
+	width: 100%;
+	height: auto;
+}
+
 .rightcollumnrepertuarempty {
 	width: 100%;
-	height: 50px;
+	height: 100%;
 	display: flex;
-	border-bottom: 1px solid #0349fc;
+	border-bottom: 1px solid #997501;
 	align-items: center;
+	justify-content: center;
 }
 
 
@@ -127,14 +174,13 @@ td {
 	transition: 200ms ease-in-out;
 	z-index: 2;
 	background-color: transparent;
-	width: 100%;
+	width: calc(100% - 50px);
 	box-sizing: border-box;
 	padding: 0px 25px;
 	top: 50%;
 	transition: 1.2s;
 	display: flex;
 	flex-direction: row;
-	border-radius: 10px;
 	left: 50%;
 }
 
@@ -143,17 +189,14 @@ td {
 	height: 25px;
 	background-color: transparent;
 	cursor: pointer;
-	border: 4px solid black;
+	/*background-image: url(resource/leftarrow.png);*/
 	transition: all 0.4s ease;
-	border-radius: 4px;
-	margin: 10px
 }
 
 .loginBoxContainer {
-	border: 1px solid black;
-	background-color: #0349fc;
+	border: 1px solid #F2D1CB;
+	background-color: #997501;
 	height: 200px;
-	border-radius: 10px;
 	overflow-y: scroll;
 	width: 100%;
 	display: flex;
@@ -164,18 +207,17 @@ td {
 .loginBoxUser {
 	display: flex;
 	width: 100px;
-	border: 1px solid #173a91;
+	border: 1px solid #F2D1CB;
 }
 
 .userBoxContainer {
 	position: absolute;
-	border: 2px solid black;
-	background-color: #0349fc;
+	border: 1px solid #F2D1CB;
+	background-color: #997501;
 	height: 200px;
-	border-radius: 10px;
 	overflow-x: hidden;
 	overflow-y: scroll;
-	width: 100%;
+	width: calc(100% - 50px);
 	margin: 1000px;
 	display: flex;
 	flex-direction: column;
@@ -194,6 +236,14 @@ td {
 	width: 50%;
 }
 
+.rowindex {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	padding: 0px;
+	align-items: center;
+}
+
 .error {
 	color: red;
 	border: 1px solid r;
@@ -205,295 +255,40 @@ td {
 	transform: translate(-50%, -50%) scale(1) !important;
 }
 
+@media screen and (min-width:1000px) {
+	.container {
+		flex-direction: column;
+		overflow: hidden;
+		width: 70;
+	}
 
+	.mainPage {
+		display: flex;
+		flex-direction: row;
+	}
 
+	.leftcollumncalendar {
+		border: none;
+		border-right: 1px solid #997501;
+	}
 
+	.leftcollumn {
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 200px;
+	}
 
+	.rightcollumn {
+		justify-content: center;
+	}
 
+	.rightcollumnrepertuar {
+		border: none;
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-*/
-
-
-
-/*
-#pasek
-{
-	float: right;
-	margin-left: 40%;
-	width: 700px;
-	max-width: 100%;
-	padding: 14px;
+	.loginBox {
+		width: 50%;
+		top: 50%;
+		left: 70%;
+	}
 }
-.klawisz
-{
-	float: left;
-	min-width: 50px;
-	max-height: 40px;
-	padding: 25px;
-	font-size: auto;
-}
-
-
-.a:hover{
-		background-color: black ;
-		color:white;
-}
-
-a:link
-{
-  text-decoration: none!important;
-  color: black !important;
-}
-
-#logo{
-	padding:14px;
-	width:50px;
-	max-width: 100%;
-}
-
-*/
-/*
-
-.zdjecie_glowna
-{
-	margin-left: 40%;
-	margin-top: 40%;
-	width: 100%;
-	max-width: 100%;
-	padding: 7px;
-	height: auto;
-}
-#dopelnienie
-{
-	background-color: #ffe4c4;
-	height: 40px;
-	weidth:100%;
-}
-#informacje
-{
-	margin: auto; 
-	padding: 0px;
-	float: left;
-	background-color: #ffe4c4;
-	width: 100%;
-	height: 150px;
-	max-width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	border-top: 4px solid #8fbc8f;
-	text-align: justify;
-	display:flex;
-	align-items:center;
-	justify-content:center;
-}
-.info
-{
-	float: left;
-	min-width: 50px;
-	max-height: 40px;
-	padding: 40px;
-	font-size: auto;
-}
-
-
-
-#logowanie
-{
-	margin-left: auto;
-	margin-right: auto;
-	padding: 40;
-	width: 400px;
-	margin-top: 400px;
-	max-width: 100%;
-	height: 500px;
-	max-height: 100%;
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	background-color: #8fbc8f;
-}
-
-#projekt
-{
-	height: auto;
-	margin-left: auto;
-	float: right;
-	margin-right: auto;
-	margin-top: 40px;
-	width: 1400px;
-	max-width: 100%;	
-	min-height: 100vh;
-	background-color: #ffe4c4;
-}
-#projekt_pudelko
-{
-	margin-left: auto;
-	margin-right: auto;
-	width: 1400px;
-	float: right;
-	height: 400px;
-	max-width: 100%;
-}
-#projekt_lewa
-{
-	margin-left: auto;
-	margin-right: auto;
-	width: 24%;
-	padding:40px;
-	float: left;
-	height: auto;
-	max_width: 50%;
-}
-.zdjecie_projekt
-{
-	display: block;
-    margin: 0 auto;
-	max-width: 100%;
-	padding: 0px;
-}
-#projekt_prawa
-{
-	margin-left: auto;
-	margin-right: 40px;
-	width: 50%;
-	float: right;
-	max_width: 100%;
-	margin-top: 0px;
-	text-align: justify;
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	font-size:50px;
-	max-height: 100px;
-	padding: 0px;
-}
-
-
-
-#zdjecia_owner
-{
-	margin-left: auto;
-	margin-right: auto;
-	float: center;
-	max_width: 100%;
-	pudding: 4px;
-	background-color: #ffe4c4;
-	min-height: 100vh;
-}#zdjecia_ramki
-{
-	height: auto;
-	margin-left: auto;
-	float: right;
-	margin-right: auto;
-	margin-top: 5px;
-	width: 1400px;
-	max-width: 100%;
-	min-height: 100vh;
-	background-color: #ffe4c4;
-}
-._zdjecie
-{	
-	width: 400px;
-	height: 200px;
-	padding: 14px;
-	max-width: 90%;
-	max-height: 90%;
-		
-}
-
-
-
-.lol_projekt
-{
-	margin-top: 50%;
-	float: center;
-}
-.infy
-{
-	margin-top: 40px;
-	margin-bottom: 40px;
-}
-
-
-
-
-*/
-
-/*
-<div id="pasek">
-			<div class="klawisz"><a href="index.php">Strona glowna</a></div>
-			<div class="klawisz"><a href="projekty.php">Projekty</a></div>
-			<div class="klawisz"><a href="znowu.php">Cena</a></div>
-			<div class="klawisz"><a href="kontakt.php">Kontakt</a></div>
-			<div style="clear:both;"></div>
-		</div>
-		<a href="index.php">
-			<div id="logo">
-				<img src="foto/logo/logo.png" />
-			</div>
-		</a>
-		
-		
-		
-<div id="informacje">
-			dane kontaktowe</br>
-			telefon</br>
-			email </br>
-			</p>
-			<p>&copy; 2021 Własność Falo. Wszelkie prawa zastrzezone.</p>
-		</div>*/
