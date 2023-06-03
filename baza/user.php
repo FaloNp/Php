@@ -62,7 +62,7 @@ if (isset($_POST["nazwa"])) {
 		}
 		/////////////////////////////////NAZWA///////////////////////////////////////////
 		else {
-			$wynik = $check->query("SELECT id FROM uzytkownicy WHERE Login = '$nazwa' "); //Czy dane juz istnieja?
+			$wynik = $check->query("SELECT id FROM uzytkownicy WHERE login = '$nazwa' "); //Czy dane juz istnieja?
 			if (!$wynik) throw new Exception($check->error);
 			$ile_nazw = $wynik->num_rows;
 			if ($ile_nazw == 1) {
@@ -70,7 +70,7 @@ if (isset($_POST["nazwa"])) {
 				$_SESSION["error_login"] = "Istnieje juz taka nazwa, wybierz inna";
 				header("Location: index.php");
 			}
-			$wynik = $check->query("SELECT id FROM uzytkownicy WHERE Date = '$r' "); //Czy dane juz istnieja?
+			$wynik = $check->query("SELECT id FROM uzytkownicy WHERE data = '$r' "); //Czy dane juz istnieja?
 			if (!$wynik) throw new Exception($check->error);
 			$ile_r = $wynik->num_rows;
 			if ($ile_r == 1) {

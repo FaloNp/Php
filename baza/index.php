@@ -18,7 +18,15 @@ session_start();
 
 <body>
 	<div class="container">
-
+		<?php
+		//require_once "table.php";
+		//if (!UzytkownicyTableExists()) {
+		//UzytkownicyTable();    
+		//}
+		//if (!RepertuarTableExists()) {
+		//RepertuarTable();
+		//}
+		?>
 
 		<div class="loginBar">
 			<div class="date">
@@ -94,22 +102,28 @@ session_start();
 						if ($request->connect_errno != 0) {
 							throw new Exception(mysqli_connect_errno());
 						} else {
-							$wynik = @$request->query(sprintf("SELECT * FROM repertuar WHERE Data = '%s'", $focusdate));
+							$wynik = @$request->query(sprintf("SELECT * FROM repertuar WHERE date = '%s'", $focusdate));
 							$ile_wyniki = $wynik->num_rows; //sprawdza ile znalazlo uzytkownikow
 							if ($ile_wyniki > 0) {
 								while ($informacje = $wynik->fetch_assoc()) {
 									echo "<div class = 'rightcollumnrepertuar'>";
 
 									echo "<div class = 'rightcollumnrepertuarelement'>";
-									echo "<img src=repertuar/Photo/" . $informacje['Photo'] . ">";
+									echo "<img src=repertuar/Photo/" . $informacje['photo'] . ">";
 									echo "</div>";
 
 									echo "<div class = 'rightcollumnrepertuarelement'>";
 									echo "<div>";
-									echo $informacje["Name"];
+									echo $informacje["name"];
 									echo "</div>";
 									echo "<div>";
-									echo $informacje["Description"];
+									echo $informacje["description"];
+									echo "</div>";
+									echo "</div>";
+
+									echo "<div class = 'rightcollumnrepertuarelement'>";
+									echo "<div class = 'rightcollumnrepertuarelementquantity'>";
+									echo "20/40";
 									echo "</div>";
 									echo "</div>";
 
@@ -216,6 +230,50 @@ session_start();
 					<input type="submit" value="Zrobione" />
 				</div>
 			</form>
+		</div>
+	</div>
+
+
+	<div class="numberofticket">
+		<div class="numberofticketcontainer">
+			<div class='loginBoxReturn'></div>
+			<div id='location'>
+				<table class="locationlist">
+					<tbody>
+						<?php
+						$x = 25; // Liczba komórek w tabeli
+						$y = 10;
+						$fullRows = floor($x / $y);
+						$extraCells = $x % 10;
+						for ($row = 1; $row <= $fullRows; $row++) {
+							echo "<tr>";
+							for ($cell = 1; $cell <= 10; $cell++) {
+								$cellnumber = $y * ($row - 1) + $cell;
+								echo "<td style=cursor:auto>$cellnumber</td>";
+							}
+							echo "</tr>";
+						}
+						if ($extraCells > 0) {
+							echo "<tr>";
+							for ($cell = 1; $cell <= $extraCells; $cell++) {
+								$cellnumber = $cellnumber + 1;
+								echo "<td style=cursor:auto>$cellnumber</td>";
+							}
+							echo "</tr>";
+						}
+						?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class='numberofticketcontainer ticketcontainer'>
+			<div class='loginBoxReturn'></div>
+			<?php
+			if ((!isset($_SESSION["zalogowano"])) || ($_SESSION["zalogowano"] == false)) {
+				echo "<div class='nologinerror'>ZALOGUJ SIE ABY KUPIC BILET</div>";
+			} else {
+				echo "<div class='loginButton'>Zaloguj</div>";
+			} ?>
 		</div>
 	</div>
 </body>

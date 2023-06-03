@@ -15,13 +15,13 @@ if ($check->connect_errno != 0) {
 	$login = $_POST["login"];
 	$haslo = $_POST["password"];
 	$login = htmlentities($login, ENT_QUOTES, "UTF-8"); //usuwanie niebezpiecznych znakow
-	if ($wynik = @$check->query(sprintf("SELECT* FROM uzytkownicy WHERE Login = '%s' ", mysqli_real_escape_string($check, $login)))) {
+	if ($wynik = @$check->query(sprintf("SELECT* FROM uzytkownicy WHERE login = '%s' OR data = '%s' ", mysqli_real_escape_string($check, $login), mysqli_real_escape_string($check, $login)))) {
 		$ile_wyniki = $wynik->num_rows; //sprawdza ile znalazlo uzytkownikow
 		if ($ile_wyniki > 0) {
 			$informacje = $wynik->fetch_assoc(); //wyciaga dene z bazy
-			if (password_verify($haslo, $informacje["Password"])) {
+			if (password_verify($haslo, $informacje["password"])) {
 				$_SESSION["zalogowano"] = true; //uzytkownik zalogowal sie na profil
-				$_SESSION["Login"] = $informacje["Login"];
+				$_SESSION["Login"] = $informacje["login"];
 				unset($_SESSION["blad"]);
 				if ($informacje['id'] == 1) {
 					$_SESSION["falo"] = true; //flaga uprawnien administratora
