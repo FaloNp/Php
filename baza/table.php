@@ -45,9 +45,9 @@ function DataTable()
     $tablename = "data";
     $table = "CREATE TABLE $tablename (
         id INT PRIMARY KEY AUTO_INCREMENT,
-        user TEXT,
-        repertuar TEXT,
-        ticket TEXT
+        userid INT,
+        repertuarid INT,
+        ticketid INT
     )";
     $connection = new mysqli($dataName, $dataLogin, $dataPassword, $dataPath);
     if ($connection->query($table) === TRUE) {
@@ -75,3 +75,7 @@ function RepertuarTableExists()
     $result = $connection->query("SHOW TABLES LIKE '$tablename'");
     return $result->num_rows > 0;
 }
+
+RepertuarTable();
+UzytkownicyTable();
+DataTable();
