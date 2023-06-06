@@ -18,16 +18,6 @@ session_start();
 
 <body>
 	<div class="container">
-		<?php
-		//require_once "table.php";
-		//if (!UzytkownicyTableExists()) {
-		//UzytkownicyTable();    
-		//}
-		//if (!RepertuarTableExists()) {
-		//RepertuarTable();
-		//}
-		?>
-
 		<div class="loginBar">
 			<div class="date">
 				<?php
@@ -120,12 +110,20 @@ session_start();
 									echo $informacje["description"];
 									echo "</div>";
 									echo "</div>";
-
+									
 									echo "<div class = 'rightcollumnrepertuarelement'>";
 									echo "<div class = 'rightcollumnrepertuarelementquantity'>";
-									echo "20/40";
+									echo "<div class='loginButton'>Kup Bilet</div>";
 									echo "</div>";
 									echo "</div>";
+
+									echo "<div class = 'rightcollumnrepertuarelement'>";
+									echo "<div id = 'rightcollumnrepertuarelementid'>";
+									//$_SESSION["RepertuarId"] = $informacje["id"];
+									echo $informacje["id"];
+									echo "</div>";
+									echo "</div>";
+
 
 									echo "</div>";
 								}
@@ -272,7 +270,8 @@ session_start();
 			if ((!isset($_SESSION["zalogowano"])) || ($_SESSION["zalogowano"] == false)) {
 				echo "<div class='nologinerror'>ZALOGUJ SIE ABY KUPIC BILET</div>";
 			} else {
-				echo "<div class='loginButton'>Zaloguj</div>";
+				echo "<div class='nologinerror'>Wybrales miejsce numer: </div>";
+				echo "<div class='loginButton'>Kup Bilet</div>";
 			} ?>
 		</div>
 	</div>
