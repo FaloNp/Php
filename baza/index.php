@@ -6,7 +6,8 @@ session_start();
 <html lang="pl">
 
 <head>
-	<script defer src='script.js'></script>
+	<script defer src='script/date.js'></script>
+	<script defer src='script/openbox.js'></script>
 	<meta charset="utf-8" />
 	<title>Teatr</title>
 	<meta name="description" content="Teatr" />
