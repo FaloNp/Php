@@ -18,7 +18,7 @@ session_start();
 </head>
 
 <body>
-	<div class="container">
+	<div id="container">
 		<div class="loginBar">
 			<div class="date">
 				<?php
@@ -113,18 +113,14 @@ session_start();
 									echo "</div>";
 									
 									echo "<div class = 'rightcollumnrepertuarelement'>";
-									echo "<div class = 'rightcollumnrepertuarelementquantity'>";
-									echo "<div class='loginButton'>Kup Bilet</div>";
-									echo "</div>";
-									echo "</div>";
-
-									echo "<div class = 'rightcollumnrepertuarelement'>";
-									echo "<div id = 'rightcollumnrepertuarelementid'>";
-									//$_SESSION["RepertuarId"] = $informacje["id"];
+									echo "<div class = 'rightcollumnrepertuarelementbuyticket'>";
+									echo "<div class='loginButton'>Kup Bilet ";
+									echo "<h style='color: transparent'>";
 									echo $informacje["id"];
+									echo "</h>";
+									echo"</div>";
 									echo "</div>";
 									echo "</div>";
-
 
 									echo "</div>";
 								}
@@ -145,7 +141,7 @@ session_start();
 
 	<div class='loginBox'>
 		<div class='loginBoxContainer'>
-			<div class='loginBoxReturn'></div>
+			<div class='ReturnButton'></div>
 			<form action="connect.php" method="post">
 				Login: <input type="text" name="login" /></p>
 				Haslo: <input type="password" name="password" /></p>
@@ -233,9 +229,9 @@ session_start();
 	</div>
 
 
-	<div class="numberofticket">
-		<div class="numberofticketcontainer">
-			<div class='loginBoxReturn'></div>
+	<div class="ticketBox">
+		<div class="ticketBoxcontainer">
+			<div class='ReturnButton'></div>
 			<div id='location'>
 				<table class="locationlist">
 					<tbody>
@@ -265,8 +261,8 @@ session_start();
 				</table>
 			</div>
 		</div>
-		<div class='numberofticketcontainer ticketcontainer'>
-			<div class='loginBoxReturn'></div>
+		<div class='ticketBoxcontainer ticketcontainer'>
+			<div class='ReturnButton'></div>
 			<?php
 			if ((!isset($_SESSION["zalogowano"])) || ($_SESSION["zalogowano"] == false)) {
 				echo "<div class='nologinerror'>ZALOGUJ SIE ABY KUPIC BILET</div>";
