@@ -22,6 +22,7 @@ if ($check->connect_errno != 0) {
 			if (password_verify($haslo, $informacje["password"])) {
 				$_SESSION["zalogowano"] = true; //uzytkownik zalogowal sie na profil
 				$_SESSION["Login"] = $informacje["login"];
+				$_SESSION["UserId"] = $informacje["id"];
 				unset($_SESSION["blad"]);
 				if ($informacje['id'] == 1) {
 					$_SESSION["falo"] = true; //flaga uprawnien administratora

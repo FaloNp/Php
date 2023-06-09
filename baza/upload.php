@@ -11,6 +11,7 @@ if (isset($_POST["uploadData"])) {
 	$date = $_POST["date"];
 	$name = $_POST["nazwa"];
 	$description = $_POST["opis"];
+	$ticket = $_POST["miejsca"];
 	$time = $_POST["time"];
 	if (empty($time)) {
 		$_SESSION["error"] = "Time: Wpisz poprawne wartosci";
@@ -23,10 +24,42 @@ if (isset($_POST["uploadData"])) {
 		exit();
 	}
 	if (empty($name)) {
-		$name = "test";
+		$_SESSION["error"] = "Name: Wpisz poprawne wartosci";
+		header("Location: uploadrepertuar.php");
+		exit();
 	}
 	if (empty($description)) {
-		$description = "test test";
+		$_SESSION["error"] = "Description: Wpisz poprawne wartosci";
+		header("Location: uploadrepertuar.php");
+		exit();
+	}
+	if (empty($ticket)) {
+		$_SESSION["error"] = "Ticket: Wpisz poprawne wartosci";
+		header("Location: uploadrepertuar.php");
+		exit();
+	}
+
+
+
+	if (preg_match("/[\'^$%&*()}{@#~?><>,|=_+-.]/", $name)) {
+		$_SESSION["error"] = "Name: Wpisano bledna wartosc";
+		header("Location: uploadrepertuar.php");
+		exit();
+	}
+	if (preg_match("/[\'^$%&*()}{@#~?><>,|=_+-.]/", $description)) {
+		$_SESSION["error"] = "Description: Wpisano bledna wartosc";
+		header("Location: uploadrepertuar.php");
+		exit();
+	}
+	if (preg_match("/[\'^$%&*()}{@#~?><>,|=_+.]/", $time)) {
+		$_SESSION["error"] = "Time: Wpisano bledna wartosc";
+		header("Location: uploadrepertuar.php");
+		exit();
+	}
+	if (preg_match("/[a-z]/i", $ticket)) {
+		$_SESSION["error"] = "Ticket: To nie liczba";
+		header("Location: uploadrepertuar.php");
+		exit();
 	}
 
 
@@ -72,8 +105,19 @@ if (isset($_POST["uploadData"])) {
 		if ($request->connect_errno != 0) {
 			throw new Exception(mysqli_connect_errno());
 		} else {
-			if ($request->query("INSERT INTO repertuar VALUES (NULL, '$date', '$name', '$description','$photo_local')")) {
-				header("Location: uploadrepertuar.php");
+			$info_repertuar = $name; //. "." . $description;
+			$id = 0;
+			if ($request->query("INSERT INTO repertuar VALUES (NULL, '$date', '$info_repertuar', '$time','$photo_local')")) {
+				$wynik = @$request->query(sprintf("SELECT * FROM repertuar WHERE date = '%s' AND name = '%s' AND time = '%s'", $date, $info_repertuar, $time));
+				$ile_wyniki = $wynik->num_rows;
+				while ($informacje = $wynik->fetch_assoc()) {
+					$id = $informacje["id"];
+				}
+				if ($request->query("INSERT INTO miejsca VALUES (NULL, '$id', '$ticket','')")) {
+					header("Location: uploadrepertuar.php");
+				} else {
+					throw new Exception($request->error);
+				}
 			} else {
 				throw new Exception($request->error);
 			}

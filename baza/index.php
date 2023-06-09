@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <?php
 session_start();
-
 ?>
 <html lang="pl">
 
@@ -93,7 +92,7 @@ session_start();
 						if ($request->connect_errno != 0) {
 							throw new Exception(mysqli_connect_errno());
 						} else {
-							$wynik = @$request->query(sprintf("SELECT * FROM repertuar WHERE date = '%s'", $focusdate));
+							$wynik = @$request->query(sprintf("SELECT * FROM repertuar WHERE date = '%s' ORDER BY time", $focusdate));
 							$ile_wyniki = $wynik->num_rows; //sprawdza ile znalazlo uzytkownikow
 							if ($ile_wyniki > 0) {
 								while ($informacje = $wynik->fetch_assoc()) {
@@ -107,18 +106,21 @@ session_start();
 									echo "<div>";
 									echo $informacje["name"];
 									echo "</div>";
-									echo "<div>";
-									echo $informacje["description"];
 									echo "</div>";
-									echo "</div>";
-									
+
 									echo "<div class = 'rightcollumnrepertuarelement'>";
 									echo "<div class = 'rightcollumnrepertuarelementbuyticket'>";
 									echo "<div class='loginButton'>Kup Bilet ";
 									echo "<h style='color: transparent'>";
 									echo $informacje["id"];
 									echo "</h>";
-									echo"</div>";
+									echo "</div>";
+									echo "</div>";
+									echo "</div>";
+
+									echo "<div class = 'rightcollumnrepertuarelement'>";
+									echo "<div>";
+									echo $informacje["time"];
 									echo "</div>";
 									echo "</div>";
 
@@ -232,33 +234,76 @@ session_start();
 	<div class="ticketBox">
 		<div class="ticketBoxcontainer">
 			<div class='ReturnButton'></div>
-			<div id='location'>
-				<table class="locationlist">
-					<tbody>
-						<?php
-						$x = 25; // Liczba komórek w tabeli
-						$y = 10;
-						$fullRows = floor($x / $y);
-						$extraCells = $x % 10;
-						for ($row = 1; $row <= $fullRows; $row++) {
-							echo "<tr>";
-							for ($cell = 1; $cell <= 10; $cell++) {
-								$cellnumber = $y * ($row - 1) + $cell;
-								echo "<td style=cursor:auto>$cellnumber</td>";
+			<div class="ticketBoxcontainerLocation">
+				<div id='location'>
+					<table class="locationlist">
+						<tbody>
+							<?php
+							$repertuaridfocus = $_COOKIE['idfocus'];
+							$_SESSION["idfocus"] = $repertuaridfocus;
+
+							//echo $repertuaridfocus;
+							$ticket = 0;
+							$noblocked = 0;
+							require_once "data.php";
+							try {
+								$request = @new mysqli($dataName, $dataLogin, $dataPassword, $dataPath);
+								if ($request->connect_errno != 0) {
+									throw new Exception(mysqli_connect_errno());
+								} else {
+									$wynik = @$request->query(sprintf("SELECT * FROM miejsca WHERE repertuarid = '%s'", $repertuaridfocus));
+									$ile_wyniki = $wynik->num_rows;
+									if ($ile_wyniki > 0) {
+										while ($informacje = $wynik->fetch_assoc()) {
+											$ticket = $informacje["ticket"];
+											$blocked = $informacje["blocked"];
+										}
+									}
+								}
+								$request->close();
+							} catch (Exception $error) {
+								echo "Serwer w tym momencie jest wylaczony, prosimy o zarejestrowanie sie pozniej"; //dla uzytkownika
+								echo "<br /> Dokladna informacja: " . $error;
 							}
-							echo "</tr>";
-						}
-						if ($extraCells > 0) {
-							echo "<tr>";
-							for ($cell = 1; $cell <= $extraCells; $cell++) {
-								$cellnumber = $cellnumber + 1;
-								echo "<td style=cursor:auto>$cellnumber</td>";
+
+							// Liczba komórek w tabeli
+							echo "<div id='valueBox'>";
+							echo $blocked;
+							echo "</div>";
+							$y = 10;
+							$fullRows = floor($ticket / $y);
+							$extraCells = $ticket % 10;
+							for ($row = 1; $row <= $fullRows; $row++) {
+								echo "<tr>";
+								for ($cell = 1; $cell <= 10; $cell++) {
+									$cellnumber = $y * ($row - 1) + $cell;
+									echo "<td style=cursor:auto>$cellnumber</td>";
+								}
+								echo "</tr>";
 							}
-							echo "</tr>";
-						}
-						?>
-					</tbody>
-				</table>
+							if ($extraCells > 0) {
+								echo "<tr>";
+								for ($cell = 1; $cell <= $extraCells; $cell++) {
+									$cellnumber = $cellnumber + 1;
+									echo "<td style=cursor:auto>$cellnumber</td>";
+								}
+								echo "</tr>";
+							}
+							?>
+						</tbody>
+					</table>
+					<div class="locationscene"></div>
+				</div>
+			</div>
+			<div class="ticketBoxcontainerInformation">
+				<div class="ticketBoxcontainerInformationRow">
+					<div class="notblocked"></div>
+					<div>WOLNE</div>
+				</div>
+				<div class="ticketBoxcontainerInformationRow">
+					<div class="blocked"></div>
+					<div>ZAJETE</div>
+				</div>
 			</div>
 		</div>
 		<div class='ticketBoxcontainer ticketcontainer'>
@@ -267,8 +312,14 @@ session_start();
 			if ((!isset($_SESSION["zalogowano"])) || ($_SESSION["zalogowano"] == false)) {
 				echo "<div class='nologinerror'>ZALOGUJ SIE ABY KUPIC BILET</div>";
 			} else {
-				echo "<div class='nologinerror'>Wybrales miejsce numer: </div>";
-				echo "<div class='loginButton'>Kup Bilet</div>";
+				echo "<div class='loginticket'></div>";
+				echo "<form action='add.php' method='post' enctype='multipart/form-data'>";
+				echo "<div class='row'>";
+				$ticketfocus = $_COOKIE['ticketfocus'];
+				$_SESSION["ticketfocus"] = $ticketfocus;
+				echo "<input type='submit' name='ticketadd' value='Kup bilet' />";
+				echo "</div>";
+				echo "</form>";
 			} ?>
 		</div>
 	</div>

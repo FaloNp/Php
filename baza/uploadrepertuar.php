@@ -24,11 +24,11 @@ if ((!isset($_SESSION["falo"])) || ($_SESSION["falo"] == false)) {
             <form action="upload.php" method="post" enctype="multipart/form-data">
                 <div class='row'>
                     <div class='rowHeader'>Nazwa: </div>
-                    <input type="text" name="nazwa" placeholder="xyz" />
+                    <input type="text" name="nazwa" placeholder="xyz" value="test" />
                 </div>
                 <div class='row'>
                     <div class='rowHeader'>Opis: </div>
-                    <input type="text" name="opis" placeholder="xyz" />
+                    <input type="text" name="opis" placeholder="xyz" value="test test" />
                 </div>
                 <div class='row'>
                     <div class='rowHeader'>Data: </div>
@@ -36,7 +36,11 @@ if ((!isset($_SESSION["falo"])) || ($_SESSION["falo"] == false)) {
                 </div>
                 <div class='row'>
                     <div class='rowHeader'>Time: </div>
-                    <input type="text" name="time" placeholder="00-00" />
+                    <input type="text" name="time" placeholder="00-00" value="00-00" />
+                </div>
+                <div class='row'>
+                    <div class='rowHeader'>Miejsca: </div>
+                    <input type="text" name="miejsca" placeholder="0" value="10" />
                 </div>
                 <div class='row'>
                     <div class='rowHeader'>Dodaj zdjecie: </div>

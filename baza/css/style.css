@@ -19,6 +19,12 @@ td {
 	flex-basis: 0;
 	flex-grow: 1;
 	background-color: pink;
+	height: 50px;
+	width: 50px;
+}
+
+tr {
+	max-height: 50px;
 }
 
 td:hover {
@@ -57,7 +63,8 @@ td:hover {
 	padding: 0px;
 	align-items: center;
 }
-	/*Pojemnik index.php*/
+
+/*Pojemnik index.php*/
 .loginBar {
 	width: 100%;
 	height: 50px;
@@ -109,7 +116,7 @@ td:hover {
 	padding: 50px 5px;
 }
 
-	/*Lewa kolumna pojemnika*/
+/*Lewa kolumna pojemnika*/
 
 .leftcollumn {
 	background-color: transparent;
@@ -157,7 +164,7 @@ td:hover {
 	cursor: pointer;
 }
 
-	/*Prawa kolumna pojemnika*/
+/*Prawa kolumna pojemnika*/
 
 .rightcollumn {
 	width: 100%;
@@ -192,12 +199,12 @@ td:hover {
 	flex-direction: column;
 }
 
-.rightcollumnrepertuarelementbuyticket{
+.rightcollumnrepertuarelementbuyticket {
 	display: flex;
 	flex-direction: row;
 }
-#rightcollumnrepertuarelementid{
-}
+
+#rightcollumnrepertuarelementid {}
 
 .rightcollumnrepertuarelementquantity:hover {
 	color: #997501;
@@ -250,6 +257,7 @@ td:hover {
 	flex-direction: row;
 	left: 50%;
 }
+
 .loginBoxContainer {
 	border: 1px solid #F2D1CB;
 	background-color: #997501;
@@ -300,25 +308,75 @@ td:hover {
 	border: 1px solid #997501;
 }
 
-.ticketBoxcontainer{
+.ticketBoxcontainer {
 	width: 100%;
 	height: 100%;
 	padding: 10px;
 	display: flex;
+	flex-direction: row;
 	align-items: center;
+}
+
+.ticketBoxcontainerLocation {
+	width: 70%;
+	display: flex;
+	flex-direction: column;
 }
 
 #location {
 	display: flex;
+	flex-direction: column;
+	align-items: center;
 	justify-content: center;
 	width: 100%;
-	height: 70%;
+	height: 100%;
 }
 
 .locationlist {
+	display: flex;
 	background-color: transparent;
 }
 
+.locationlist td {
+	background-color: red;
+}
+
+.locationscene {
+	width: 70%;
+	height: 50px;
+	background-color: black;
+	margin: 20px 0px;
+}
+
+.ticketBoxcontainerInformation {
+	position: absolute;
+	right: 1px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 20px;
+}
+
+.ticketBoxcontainerInformationRow {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 10px 0px;
+	width: 155px;
+}
+
+.blocked {
+	height: 20px;
+	width: 20px;
+	background-color: red;
+}
+
+.notblocked {
+	height: 20px;
+	width: 20px;
+	background-color: green;
+}
 
 .ticketcontainer {
 	position: absolute;
@@ -335,6 +393,10 @@ td:hover {
 	color: blue;
 }
 
+.loginticket {
+	width: 100%;
+	color: blue;
+}
 
 
 .error {
@@ -342,7 +404,7 @@ td:hover {
 	border: 1px solid red;
 	width: 200px;
 	padding: 12px;
-	
+
 }
 
 .activefield {
@@ -351,8 +413,52 @@ td:hover {
 
 .buyTicket {
 	cursor: pointer;
-	color: green;
+	background-color: green !important;
 }
+
+#valueBox {
+	background-color: transparent;
+	color: transparent;
+	position: absolute;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media screen and (min-width:1000px) {
 	#container {
 		flex-direction: column;
